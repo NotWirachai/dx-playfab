@@ -15,7 +15,7 @@
     public class Player : ControllerBase
     {
         [HttpPost("collectionId")]
-        public async Task<dynamic> GetInventoryCollectionIdsAsync(HttpClient httpClient, [FromHeader(Name = "X-EntityToken")] string entityToken, [FromBody] LoginInputModel loginInputModel)
+        public async Task<dynamic> GetInventoryCollectionIdsAsync(HttpClient httpClient, [FromHeader(Name = "X-EntityToken")] string entityToken, [FromBody] CollectionInputModel collectionInputModel)
         {
             string titleId = "2506C";
             string url = $"https://{titleId}.playfabapi.com/Inventory/GetInventoryCollectionIds";
@@ -61,7 +61,7 @@
                         { "Amount", 1 },
                         { "Entity", new Dictionary<string, object>
                             {
-                                { "Id", loginInputModel.EntityId },
+                                { "Id", collectionInputModel.EntityId },
                                 { "Type", "title_player_account" },
                                 { "TypeString", "title_player_account" }
                             }

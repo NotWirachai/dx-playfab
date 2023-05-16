@@ -6,6 +6,5 @@
 
         public bool? CreateAccount { get; set; }
 
-        public string? EntityId { get; set; }
     }
 }
