@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text;
 using dx_backoffice.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace dx_backoffice.Controllers
 {
@@ -17,8 +18,15 @@ namespace dx_backoffice.Controllers
             _db = db;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetState()
+        {
+            List<StateModel> state = await _db.State.ToListAsync();
+            return Ok(state);
+        }
+
         [HttpPost]
-        public IActionResult CreateState([FromBody]StateModel state)
+        public IActionResult CreateState([FromBody] StateModel state)
         {
             _db.State.Add(state);
             _db.SaveChanges();

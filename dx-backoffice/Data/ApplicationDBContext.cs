@@ -10,6 +10,12 @@ namespace dx_backoffice.Data
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PirateShipModel>().Property(x => x.Id).ValueGeneratedOnAdd();
+        }
+
         public DbSet<StateModel> State { get; set; }
+        public DbSet<PirateShipModel> PirateShips { get; set; }
     }
 }
