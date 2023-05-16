@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using dx_backoffice.Models;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace dx_backoffice.Data
 {
@@ -13,6 +14,8 @@ namespace dx_backoffice.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PirateShipModel>().Property(x => x.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<StateModel>().Property(x => x.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<StateModel>().HasKey(x => x.Id).HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
         }
 
         public DbSet<StateModel> State { get; set; }

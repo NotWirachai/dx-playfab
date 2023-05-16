@@ -11,8 +11,8 @@ using dx_backoffice.Data;
 namespace dx_backoffice.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20230516101814_addState")]
-    partial class addState
+    [Migration("20230516132057_addState2")]
+    partial class addState2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,36 @@ namespace dx_backoffice.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("dx_backoffice.Models.PirateShipModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BuildingUnlocked")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ConstructionTime")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TotalPower")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UseGemToFinish")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PirateShips");
+                });
 
             modelBuilder.Entity("dx_backoffice.Models.StateModel", b =>
                 {
@@ -36,7 +66,8 @@ namespace dx_backoffice.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.ToTable("State");
                 });
