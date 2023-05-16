@@ -1,26 +1,21 @@
-﻿namespace dx_backoffice.Model
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
+namespace dx_backoffice.Models
 {
     public class StateModel
     {
-        public string state { get; set; }
-        public string uniqueId { get; set; }
-
-        public void GenerateUniqueId()
-        {
-            // Generate a new UUID
-            uniqueId = Guid.NewGuid().ToString();
-        }
+        [Key]
+        public int Id { get; set; }
+        public string State { get; set; }
 
         public string GetRandomState()
         {
-            // Define the available states
             string[] states = { "State1", "State2", "State3", "State4", "State5", "State6" };
 
-            // Generate a random index
             Random random = new Random();
             int index = random.Next(0, states.Length);
 
-            // Return the randomly selected state
             return states[index];
         }
     }

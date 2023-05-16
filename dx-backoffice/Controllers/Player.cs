@@ -8,7 +8,8 @@
     using System.Text.Json;
     using System.Threading.Tasks;
     using System.Xml.Linq;
-    using dx_backoffice.Model;
+    using dx_backoffice.Models;
+    using System.Xml;
 
     [ApiController]
     [Route("[controller]")]
@@ -21,9 +22,9 @@
             string url = $"https://{titleId}.playfabapi.com/Inventory/GetInventoryCollectionIds";
 
             var data = new Dictionary<string, object>
-    {
-        { "Count", 1 },
-    };
+                {
+                    { "Count", 1 },
+                };
 
             string json = JsonSerializer.Serialize(data);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -35,8 +36,9 @@
             dynamic jsonResult = JsonSerializer.Deserialize<dynamic>(responseBody);
 
             StateModel stateModel = new StateModel();
+            UniqueIdModel uniqueIdModel = new UniqueIdModel();
 
-            stateModel.GenerateUniqueId();
+            uniqueIdModel.GenerateUniqueId();
 
             string randomState = stateModel.GetRandomState();
 
@@ -72,7 +74,7 @@
                                 { "Type ", "bundle" },
                             }
                         },
-                        {"CollectionId", randomState+"-"+stateModel.uniqueId }
+                        {"CollectionId", randomState+"-"+uniqueIdModel.uniqueId }
                     };
 
                         string collectionJson = JsonSerializer.Serialize(requestBody);

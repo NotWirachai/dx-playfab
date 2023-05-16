@@ -1,4 +1,4 @@
-﻿namespace dx_backoffice.Model
+﻿namespace dx_backoffice.Models
 {
     public class LoginInputModel
     {
