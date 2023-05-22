@@ -225,7 +225,6 @@
         [HttpPost("updateCollection")]
         public async Task<dynamic> UpdateUserDataAsync(HttpClient httpClient, [FromBody] UpdateStateModel updateStateModel)
         {
-            string titleId = "2506C";
             string url = $"https://{titleId}.playfabapi.com/Server/UpdateUserData";
 
             var data = new Dictionary<string, object>
